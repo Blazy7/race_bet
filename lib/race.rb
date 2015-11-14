@@ -6,11 +6,9 @@ module RaceBet
         score = 0
 
         guesses.each_with_index do |guess, index|
-          #check if guess is at the right place
-          if winners.index(guess) == index
+          if correct_guess?(guess, winners, index)
             score += get_points(index)
-          #check if guess is at top five
-          elsif index < 5 && winners[0..4].include?(guess)
+          elsif guess_in_top_five?(guess, winners, index)
             score += 1
           end
         end
@@ -28,6 +26,14 @@ module RaceBet
         when 4 then 3
         when 5 then 1
         end
+      end
+
+      def correct_guess?(guess, winners, index)
+        winners.index(guess) == index
+      end
+
+      def guess_in_top_five?(guess, winners, index)
+        index < 5 && winners[0..4].include?(guess)
       end
     end
   end
