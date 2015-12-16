@@ -33,7 +33,7 @@ module RaceBet
       end
 
       def guess_in_top_five?(guess, winners, index)
-        index < 5 && winners[0..4].include?(guess)
+        index < 5 && winners.first(5).include?(guess)
       end
     end
   end
